@@ -7,6 +7,7 @@ import org.geektimes.web.mvc.controller.RestController;
 
 import javax.imageio.IIOException;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.lang.invoke.MethodHandleInfo;
 import java.lang.reflect.Method;
 import java.util.*;
 
+//@WebServlet
 import static org.apache.commons.lang.StringUtils.substringAfter;
 
 public class FrontControllerServlet extends HttpServlet {

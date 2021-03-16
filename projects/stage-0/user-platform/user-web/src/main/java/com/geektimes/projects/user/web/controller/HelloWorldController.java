@@ -1,4 +1,4 @@
-package com.geektimes.projects.web.controller;
+package com.geektimes.projects.user.web.controller;
 
 import org.geektimes.web.mvc.controller.PageController;
 
