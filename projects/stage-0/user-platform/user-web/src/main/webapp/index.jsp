@@ -4,7 +4,10 @@
 </head>
 <body>
     <div class="container-lg">
-        Hello,World 2021
+        Hello World 2021
+        <div>
+            <a href="/register">注册</a>
+        </div>
     </div>
 </body>
 </html>

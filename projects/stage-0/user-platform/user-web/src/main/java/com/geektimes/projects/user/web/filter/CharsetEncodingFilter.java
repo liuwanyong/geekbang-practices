@@ -23,7 +23,7 @@ public class CharsetEncodingFilter implements Filter {
             HttpServletResponse httpServletResponse=(HttpServletResponse) response;
             httpServletRequest.setCharacterEncoding(this.encoding);
             httpServletResponse.setCharacterEncoding(this.encoding);
-            this.servletContext.log("当前编码已设置为：" + this.encoding);
+            this.servletContext.log(httpServletRequest.getRequestURI() + " 当前编码已设置为：" + this.encoding);
         }
         chain.doFilter(request,response);
     }
