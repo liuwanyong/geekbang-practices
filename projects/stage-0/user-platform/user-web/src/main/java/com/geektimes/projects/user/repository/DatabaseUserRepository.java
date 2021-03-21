@@ -1,6 +1,7 @@
 package com.geektimes.projects.user.repository;
 
 import com.geektimes.function.ThrowableFunction;
+import com.geektimes.projects.user.context.ComponentContext;
 import com.geektimes.projects.user.domain.User;
 import com.geektimes.projects.user.sql.DBConnectionManager;
 
@@ -27,10 +28,18 @@ public class DatabaseUserRepository implements UserRepository{
 
     public static final String INSERT_USER_DML_SQL="INSERT INTO users(name,password,email,phoneNumber) VALUES (?,?,?,?)";
 
-    private final DBConnectionManager dbConnectionManager;
+    public void setDbConnectionManager(DBConnectionManager dbConnectionManager) {
+        this.dbConnectionManager = dbConnectionManager;
+    }
+
+    private DBConnectionManager dbConnectionManager;
 
     public DatabaseUserRepository(DBConnectionManager dbConnectionManager){
         this.dbConnectionManager=dbConnectionManager;
+    }
+
+    public DatabaseUserRepository(){
+        this.dbConnectionManager= ComponentContext.getInstance().getComponent("bean/DBConnectionManager");
     }
 
     private Connection getConnection(){

@@ -1,5 +1,6 @@
 package com.geektimes.projects.user.web.controller;
 
+import com.geektimes.projects.user.context.ComponentContext;
 import com.geektimes.projects.user.domain.User;
 import com.geektimes.projects.user.repository.DatabaseUserRepository;
 import com.geektimes.projects.user.repository.UserRepository;
@@ -27,6 +28,12 @@ public class RegisterController implements PageController {
 
     private static final Log log = LogFactory.getLog(RegisterController.class);
 
+    UserService userService;
+
+    public RegisterController(){
+        userService= ComponentContext.getInstance().getComponent("bean/UserService");
+    }
+
     @GET
     @POST
     @Path("")
@@ -42,10 +49,13 @@ public class RegisterController implements PageController {
 //        DBConnectionManager dbConnectionManager=new DBConnectionManager();
 //        dbConnectionManager.init();
 
-        DBConnectionManager dbConnectionManager = (DBConnectionManager) request.getServletContext().getAttribute("dbConnectionManager");
+//        DBConnectionManager dbConnectionManager = (DBConnectionManager) request.getServletContext().getAttribute("dbConnectionManager");
 
-        UserRepository userRepository = new DatabaseUserRepository(dbConnectionManager);
-        UserService userService = new UserServiceImpl(userRepository);
+//        UserRepository userRepository = new DatabaseUserRepository(dbConnectionManager);
+//        UserRepository userRepository=new DatabaseUserRepository();
+//        UserService userService = new UserServiceImpl(userRepository);
+
+
         try {
             userService.register(user);
         } catch (Exception ex) {

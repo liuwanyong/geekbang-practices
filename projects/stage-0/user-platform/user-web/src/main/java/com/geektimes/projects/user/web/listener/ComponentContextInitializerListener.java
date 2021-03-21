@@ -1,5 +1,6 @@
 package com.geektimes.projects.user.web.listener;
 
+import com.geektimes.projects.user.context.ComponentContext;
 import com.geektimes.projects.user.sql.DBConnectionManager;
 
 import javax.naming.Context;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
  * 数据库连接初始化监听器
  */
 @WebListener
-public class DBConnectionInitializerListener implements ServletContextListener {
+public class ComponentContextInitializerListener implements ServletContextListener {
 
     private ServletContext servletContext;
 
@@ -26,15 +27,21 @@ public class DBConnectionInitializerListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         this.servletContext = sce.getServletContext();
         System.out.println("启动");
-        Connection connection = getConnection();
-        DBConnectionManager dbConnectionManager=new DBConnectionManager();
-        dbConnectionManager.setConnection(connection);
-        servletContext.setAttribute("dbConnectionManager",dbConnectionManager);
+//        Connection connection = getConnection();
+//        DBConnectionManager dbConnectionManager=new DBConnectionManager();
+//        dbConnectionManager.setConnection(connection);
+//        servletContext.setAttribute("dbConnectionManager",dbConnectionManager);
+
+        ComponentContext componentContext=new ComponentContext();
+        componentContext.init(servletContext);
+//        servletContext.setAttribute(ComponentContext.CONTEXT_NAME,componentContext);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-
+//        ComponentContext componentContext= (ComponentContext) sce.getServletContext().getAttribute(ComponentContext.CONTEXT_NAME);
+        ComponentContext componentContext=ComponentContext.getInstance();
+        componentContext.destroy();
     }
 
     /**
@@ -42,7 +49,6 @@ public class DBConnectionInitializerListener implements ServletContextListener {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-
     @Deprecated
     private Connection getConnectionByCode() throws ClassNotFoundException, SQLException {
         String databaseURL = "jdbc:derby:E:/db/user-platform;create=true";

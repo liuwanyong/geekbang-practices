@@ -23,11 +23,10 @@
               url="jdbc:derby:E:/db/user-platform;create=true"/>
 
 	<!-- FactoryBean -->
-	<!--
 	<Resource name="bean/DBConnectionManager" auth="Container"
-			  type="org.geektimes.projects.user.sql.DBConnectionManager"
+			  type="com.geektimes.projects.user.sql.DBConnectionManager"
 			  factory="org.apache.naming.factory.BeanFactory" />
-	 -->
+
 
 	<!--
 	缺少指定 interface 类型的属性
@@ -43,9 +42,15 @@
 	<Resource name="bean/Validator" auth="Container"
 			  type="org.geektimes.projects.user.validator.bean.validation.DelegatingValidator"
 			  factory="org.apache.naming.factory.BeanFactory" />
+	-->
+
+	<Resource name="bean/DatabaseUserRepository" auth="Container"
+			  type="com.geektimes.projects.user.repository.DatabaseUserRepository"
+			  factory="org.apache.naming.factory.BeanFactory"
+			   />
 
 	<Resource name="bean/UserService" auth="Container"
-			  type="org.geektimes.projects.user.service.UserServiceImpl"
-			  factory="org.apache.naming.factory.BeanFactory" />
-	 -->
+			  type="com.geektimes.projects.user.service.impl.UserServiceImpl"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
 </Context>

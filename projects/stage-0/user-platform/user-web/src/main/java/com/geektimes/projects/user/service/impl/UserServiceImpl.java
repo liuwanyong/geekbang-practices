@@ -1,6 +1,8 @@
 package com.geektimes.projects.user.service.impl;
 
+import com.geektimes.projects.user.context.ComponentContext;
 import com.geektimes.projects.user.domain.User;
+import com.geektimes.projects.user.repository.DatabaseUserRepository;
 import com.geektimes.projects.user.repository.UserRepository;
 import com.geektimes.projects.user.service.UserService;
 
@@ -8,6 +10,16 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository){
         this.userRepository=userRepository;
+    }
+
+    public UserServiceImpl(){
+//        this.userRepository=new DatabaseUserRepository();
+
+        this.userRepository= ComponentContext.getInstance().getComponent("bean/DatabaseUserRepository");
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     private UserRepository userRepository;
