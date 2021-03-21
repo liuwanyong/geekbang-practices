@@ -25,30 +25,32 @@ import java.io.IOException;
 @Path("/register")
 public class RegisterController implements PageController {
 
-    private static final Log log= LogFactory.getLog(RegisterController.class);
+    private static final Log log = LogFactory.getLog(RegisterController.class);
 
     @GET
     @POST
     @Path("")
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String method=request.getMethod();
-        if("GET".equals(method)){
+        String method = request.getMethod();
+        if ("GET".equals(method)) {
             return "register-form.jsp";
         }
         User user = getUser(request);
 //        UserService userService = (UserService)ComponentContext.getInstance().getComponent("bean/UserService");
 
-        DBConnectionManager dbConnectionManager=new DBConnectionManager();
-        dbConnectionManager.init();
+//        DBConnectionManager dbConnectionManager=new DBConnectionManager();
+//        dbConnectionManager.init();
 
-        UserRepository userRepository=new DatabaseUserRepository(dbConnectionManager);
-        UserService userService=new UserServiceImpl(userRepository);
+        DBConnectionManager dbConnectionManager = (DBConnectionManager) request.getServletContext().getAttribute("dbConnectionManager");
+
+        UserRepository userRepository = new DatabaseUserRepository(dbConnectionManager);
+        UserService userService = new UserServiceImpl(userRepository);
         try {
             userService.register(user);
-        }catch (Exception ex){
-            request.setAttribute("errors",ex.getMessage());
-            request.getRequestDispatcher("register-failed.jsp").forward(request,response);
+        } catch (Exception ex) {
+            request.setAttribute("errors", ex.getMessage());
+            request.getRequestDispatcher("register-failed.jsp").forward(request, response);
         }
 
         return "register-success.jsp";
@@ -56,16 +58,17 @@ public class RegisterController implements PageController {
 
     /**
      * 获取注册用户信息
+     *
      * @param request
      * @return
      */
     private User getUser(HttpServletRequest request) {
-        String username= request.getParameter("username");
-        String password= request.getParameter("password");
-        String email= request.getParameter("email");
-        String phoneNumber= request.getParameter("phoneNumber");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phoneNumber");
 
-        User user=new User();
+        User user = new User();
         user.setName(username);
         user.setPassword(password);
         user.setEmail(email);

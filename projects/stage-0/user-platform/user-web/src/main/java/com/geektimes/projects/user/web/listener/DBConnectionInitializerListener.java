@@ -1,5 +1,7 @@
 package com.geektimes.projects.user.web.listener;
 
+import com.geektimes.projects.user.sql.DBConnectionManager;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,6 +26,9 @@ public class DBConnectionInitializerListener implements ServletContextListener {
         this.servletContext = sce.getServletContext();
         System.out.println("启动");
         Connection connection = getConnection();
+        DBConnectionManager dbConnectionManager=new DBConnectionManager();
+        dbConnectionManager.setConnection(connection);
+        servletContext.setAttribute("dbConnectionManager",dbConnectionManager);
     }
 
     @Override

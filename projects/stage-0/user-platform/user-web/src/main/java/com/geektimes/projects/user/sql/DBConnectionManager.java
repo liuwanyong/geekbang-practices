@@ -36,6 +36,11 @@ public class DBConnectionManager {
         }
     }
 
+    /**
+     * 初始化的方式
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public void init() throws ClassNotFoundException, SQLException {
         String databaseURL = "jdbc:derby:E:/db/user-platform;create=true";
         String driverName="org.apache.derby.jdbc.EmbeddedDriver";
