@@ -1,8 +1,16 @@
 package com.geektimes.projects.user.management;
 
 import javax.management.*;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * 动态结构，无固定接口类型（运行时确定）
+ */
 public class UserMXBean implements DynamicMBean {
+
+    private Map<String,Object> attributes = new HashMap<>();
+
     @Override
     public Object getAttribute(String attribute) throws AttributeNotFoundException, MBeanException, ReflectionException {
         return null;

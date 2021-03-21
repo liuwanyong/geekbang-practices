@@ -19,6 +19,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.io.IOException;
 
+/**
+ * 用户注册
+ */
 @Path("/register")
 public class RegisterController implements PageController {
 
@@ -51,6 +54,11 @@ public class RegisterController implements PageController {
         return "register-success.jsp";
     }
 
+    /**
+     * 获取注册用户信息
+     * @param request
+     * @return
+     */
     private User getUser(HttpServletRequest request) {
         String username= request.getParameter("username");
         String password= request.getParameter("password");

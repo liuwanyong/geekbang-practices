@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 public class DBConnectionManager {
 
@@ -34,7 +33,7 @@ public class DBConnectionManager {
     }
 
     public void init() throws ClassNotFoundException, SQLException {
-        String databaseURL = "jdbc:derby:/db/user-platform;create=true";
+        String databaseURL = "jdbc:derby:E:/db/user-platform;create=true";
         String driverName="org.apache.derby.jdbc.EmbeddedDriver";
         Class.forName(driverName);
         this.connection = DriverManager.getConnection(databaseURL);
@@ -58,7 +57,7 @@ public class DBConnectionManager {
             "('E','******','e@gmail.com','5')";
 
     public static void main(String [] args) throws Exception{
-        String databaseURL = "jdbc:derby:/db/user-platform;create=true";
+        String databaseURL = "jdbc:derby:E:/db/user-platform;create=true";
         String driverName="org.apache.derby.jdbc.EmbeddedDriver";
 
         Class.forName(driverName);

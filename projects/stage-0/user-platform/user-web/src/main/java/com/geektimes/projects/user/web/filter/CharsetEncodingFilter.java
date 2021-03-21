@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 编码过滤器
+ */
 public class CharsetEncodingFilter implements Filter {
 
     private String encoding=null;
