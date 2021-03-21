@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
@@ -38,6 +39,18 @@ public class DatabaseUserRepository implements UserRepository{
 
     @Override
     public boolean save(User user) {
+        try {
+            PreparedStatement preparedStatement=this.getConnection().prepareStatement(INSERT_USER_DML_SQL);
+            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(2,user.getPassword());
+            preparedStatement.setString(3,user.getEmail());
+            preparedStatement.setString(4,user.getPhoneNumber());
+            int affected = preparedStatement.executeUpdate();
+            return  affected==1;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return false;
     }
 
