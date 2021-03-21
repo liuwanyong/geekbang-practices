@@ -2,6 +2,10 @@ package com.geektimes.projects.user.sql;
 
 import com.geektimes.projects.user.domain.User;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
