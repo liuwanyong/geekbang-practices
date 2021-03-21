@@ -11,6 +11,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
@@ -34,6 +35,20 @@ public class DBConnectionInitializerListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
 
+    }
+
+    /**
+     * 使用编码的方式初始化数据连接
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+
+    @Deprecated
+    private Connection getConnectionByCode() throws ClassNotFoundException, SQLException {
+        String databaseURL = "jdbc:derby:E:/db/user-platform;create=true";
+        String driverName="org.apache.derby.jdbc.EmbeddedDriver";
+        Class.forName(driverName);
+        return DriverManager.getConnection(databaseURL);
     }
 
     protected Connection getConnection() {

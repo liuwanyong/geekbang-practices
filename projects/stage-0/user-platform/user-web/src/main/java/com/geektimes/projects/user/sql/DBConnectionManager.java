@@ -36,18 +36,6 @@ public class DBConnectionManager {
         }
     }
 
-    /**
-     * 初始化的方式
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
-    public void init() throws ClassNotFoundException, SQLException {
-        String databaseURL = "jdbc:derby:E:/db/user-platform;create=true";
-        String driverName="org.apache.derby.jdbc.EmbeddedDriver";
-        Class.forName(driverName);
-        this.connection = DriverManager.getConnection(databaseURL);
-    }
-
     public static final String DROP_USERS_TABLE_DDL_SQL="DROP TABLE users";
 
     public static final String CREATE_USERS_TABLE_DDL_SQL="CREATE TABLE users(" +
